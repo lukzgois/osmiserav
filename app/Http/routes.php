@@ -15,9 +15,15 @@ Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 
 //expenses routes
-Route::get('expense', ['as' => 'expense.index', 'uses' => 'ExpenseController@index']);
-Route::get('expense/create', ['as' => 'expense.create', 'uses' => 'ExpenseController@create']);
-Route::get('expense', ['as' => 'expense.store', 'uses' => 'ExpenseController@store']);
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('expense', ['as' => 'expense.index', 'uses' => 'ExpenseController@index']);
+    Route::get('expense/create', ['as' => 'expense.create', 'uses' => 'ExpenseController@create']);
+    Route::get('expense/split', ['as' => 'expense.split', 'uses' => 'ExpenseController@split']);
+    Route::post('expense', ['as' => 'expense.store', 'uses' => 'ExpenseController@store']);
+});
+
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

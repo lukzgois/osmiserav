@@ -1,11 +1,15 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Requests\SplitExpenseRequest;
+use App\Repositories\ExpenseRepository;
+use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Input;
 
-use App\Http\Requests\AddExpenseRequest;
-use Illuminate\Http\Request;
-
+/**
+ * Class ExpenseController
+ * @package App\Http\Controllers
+ */
 class ExpenseController extends Controller {
 
 	/**
@@ -23,63 +27,50 @@ class ExpenseController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(UserRepository $userRepository)
 	{
-		return view('expense.create');
+        $user = $userRepository->lists('name', 'id');
+		return view('expense.create', [
+            'user' => $user
+        ]);
 	}
+
+
+    /**
+     * Show the form to split the expenses across the users
+     *
+     * @param SplitExpenseRequest $request
+     * @param UserRepository $userRepository
+     * @return \Illuminate\View\View
+     */
+    public function split(SplitExpenseRequest $request, UserRepository $userRepository)
+    {
+        $data = Input::only('owner', 'value', 'reference');
+        $users = $userRepository->all()->except($data['owner']);
+        $value = $data['value'];
+        $perUser = $value / $users->count();
+
+        return view('expense.split', [
+            'users' => $users,
+            'value' => $value,
+            'perUser' => $perUser,
+            'owner_id' => $data['owner'],
+            'description' => $data['reference']
+        ]);
+    }
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store(AddExpenseRequest $request)
+	public function store(ExpenseRepository $repository)
 	{
-		dd(\Input::all());
-	}
+		$data = Input::except('_token');
+        $repository->store($data);
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+        return redirect('expense')->with('success', 'Despesa adicionada com sucesso.');
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
 	}
 
 }

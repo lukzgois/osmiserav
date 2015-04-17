@@ -2,22 +2,13 @@
 
 @section("content")
 
-    {!! Form::open(array('url' => 'expense')) !!}
+    {!! Form::open(array('url' => 'expense/split', 'method' => 'GET')) !!}
 
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include('partials.errors')
 
     <div class="form-group">
         {!! Form::label('owner', 'Quem pagou por essa despesa?'); !!}
-        {!! Form::text('owner', null, ['class' => 'form-control']) !!}
+        {!! Form::select('owner', $user, null, ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group">
