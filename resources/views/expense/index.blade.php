@@ -5,7 +5,7 @@
     @include('partials.flash-messages')
 
     <div class="row">
-        <a href="{{ url('expense/create') }}" class="btn btn-primary">
+        <a href="{{ url('expenses/create') }}" class="btn btn-primary">
             Adicionar Despesa
         </a>
     </div>

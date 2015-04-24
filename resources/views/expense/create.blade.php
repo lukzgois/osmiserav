@@ -2,7 +2,7 @@
 
 @section("content")
 
-    {!! Form::open(array('url' => 'expense/split', 'method' => 'GET')) !!}
+    {!! Form::open(array('url' => 'expenses/split', 'method' => 'GET')) !!}
 
     @include('partials.errors')
 

@@ -30,4 +30,9 @@ class ExpenseRepository {
         return true;
     }
 
+    public function debt($user_id)
+    {
+        return Expense::where('owner_id', (int)$user_id)->sum('value');
+    }
+
 }

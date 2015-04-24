@@ -4,7 +4,7 @@
 
     <h1>Dividir Despesa</h1>
 
-    {!! Form::open(array('url' => 'expense')) !!}
+    {!! Form::open(array('url' => 'expenses')) !!}
 
 
     {!! Form::hidden('owner', $owner_id) !!}

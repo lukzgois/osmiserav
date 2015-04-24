@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Repositories\ExpenseRepository;
+
 class HomeController extends Controller {
 
 	/*
@@ -28,7 +30,7 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(ExpenseRepository $expenseRepository)
 	{
 		return view('home');
 	}
