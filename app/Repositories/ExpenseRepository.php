@@ -8,6 +8,16 @@ use App\Expense;
  */
 class ExpenseRepository {
 
+
+    /**
+     * @var BalanceRepository
+     */
+    private $balanceRepo;
+
+    public function __construct(BalanceRepository $balanceRepo)
+    {
+        $this->balanceRepo = $balanceRepo;
+    }
     /**
      * Create expenses for the users
      *
@@ -25,6 +35,8 @@ class ExpenseRepository {
             $expense->owner_id = $data['owner'];
             $expense->description = $data['description'];
             $expense->save();
+
+            $this->balanceRepo->decrement($user, $data['owner'], $value);
         }
 
         return true;

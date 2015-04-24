@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Expense;
 use App\Http\Requests;
 use App\Http\Requests\SplitExpenseRequest;
 use App\Repositories\ExpenseRepository;
@@ -19,7 +20,8 @@ class ExpenseController extends Controller {
 	 */
 	public function index()
 	{
-		return view('expense.index');
+        $expenses = Expense::where('user_id', \Auth::user()->id)->get()->all();
+		return view('expense.index', compact('expenses'));
 	}
 
 	/**
@@ -69,7 +71,7 @@ class ExpenseController extends Controller {
 		$data = Input::except('_token');
         $repository->store($data);
 
-        return redirect('expense')->with('success', 'Despesa adicionada com sucesso.');
+        return redirect('expenses')->with('success', 'Despesa adicionada com sucesso.');
 
 	}
 
