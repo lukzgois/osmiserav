@@ -13,10 +13,15 @@ class ExpenseRepository {
      * @var BalanceRepository
      */
     private $balanceRepo;
+    /**
+     * @var AccountStatementRepository
+     */
+    private $accountRepo;
 
-    public function __construct(BalanceRepository $balanceRepo)
+    public function __construct(BalanceRepository $balanceRepo, AccountStatementRepository $accountRepo)
     {
         $this->balanceRepo = $balanceRepo;
+        $this->accountRepo = $accountRepo;
     }
     /**
      * Create expenses for the users
@@ -37,6 +42,12 @@ class ExpenseRepository {
             $expense->save();
 
             $this->balanceRepo->decrement($user, $data['owner'], $value);
+            $this->accountRepo->store([
+                'user_id' => $user,
+                'operation' => 'd',
+                'description' => $data['description'],
+                'value' => $value
+            ]);
         }
 
         return true;
