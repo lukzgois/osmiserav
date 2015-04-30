@@ -21,6 +21,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('expenses/create', ['as' => 'expense.create', 'uses' => 'ExpenseController@create']);
     Route::get('expenses/split', ['as' => 'expense.split', 'uses' => 'ExpenseController@split']);
     Route::post('expenses', ['as' => 'expense.store', 'uses' => 'ExpenseController@store']);
+
+	Route::get('account-statement', ['as' => 'account-statement.index', 'uses' => 'AccountStatementController@index']);
 });
 
 

@@ -16,13 +16,13 @@ class UserTableSeeder extends Seeder {
 
         User::create([
             'name' => 'User1',
-            'email' => 'user1@dev',
+            'email' => 'user1@dev.com',
             'password' => '123456'
         ]);
 
         User::create([
             'name' => 'User2',
-            'email' => 'user2@dev',
+            'email' => 'user2@dev.com',
             'password' => '123456'
         ]);
 
