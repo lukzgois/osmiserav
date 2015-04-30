@@ -1,6 +1,9 @@
 <?php namespace App\Http\Controllers;
 
+use App\Repositories\BalanceRepository;
 use App\Repositories\ExpenseRepository;
+use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller {
 
@@ -18,7 +21,6 @@ class HomeController extends Controller {
 	/**
 	 * Create a new controller instance.
 	 *
-	 * @return void
 	 */
 	public function __construct()
 	{
@@ -30,9 +32,15 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index(ExpenseRepository $expenseRepository)
+	public function index(BalanceRepository $balanceRepository)
 	{
-		return view('home');
+		$mine = $balanceRepository->mine(Auth::user()->id);
+		$others = $balanceRepository->others(Auth::user()->id);
+
+		return view('home', [
+			'balances' => $mine,
+			'othersBalances' => $others
+		]);
 	}
 
 }
