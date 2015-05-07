@@ -34,6 +34,8 @@ class ExpenseRepository {
 
         foreach ($data['user'] as $user => $value)
         {
+			$value = str_replace(',','.', str_replace('.','.', $value));
+
             $expense = new Expense;
             $expense->user_id = $user;
             $expense->value = $value;

@@ -13,7 +13,7 @@
 
     <div class="form-group">
         {!! Form::label('value', 'Quanto custou?'); !!}
-        {!! Form::text('value', null, ['class' => 'form-control']) !!}
+        {!! Form::text('value', null, ['class' => 'form-control money']) !!}
     </div>
 
     <div class="form-group">
