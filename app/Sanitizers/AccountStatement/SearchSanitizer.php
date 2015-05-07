@@ -1,4 +1,5 @@
 <?php namespace App\Sanitizers\AccountStatement;
+use Carbon\Carbon;
 
 /**
  * Class SearchSanitizer
@@ -19,12 +20,12 @@ class SearchSanitizer {
 			: $input['user'];
 
 		$input['start'] = isset($input['start'])
-			? $input['start']
-			: Carbon::now()->subMonth()->format('Y-m-d');
+			? Carbon::createFromFormat('d/m/Y',$input['start'])
+			: Carbon::now()->subMonth();
 
 		$input['end'] = isset($input['end'])
-			? $input['end']
-			: Carbon::now()->format('Y-m-d');
+			? Carbon::createFromFormat('d/m/Y', $input['end'])
+			: Carbon::now();
 
 		return $input;
 	}

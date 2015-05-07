@@ -43,8 +43,8 @@ class AccountStatementController extends Controller {
 			'statements' => $statements,
 			'users' => $users,
 			'user' => $input['user'],
-			'start' => $input['start'],
-			'end' => $input['end']
+			'start' => $input['start']->format('d/m/Y'),
+			'end' => $input['end']->format('d/m/Y')
 		]);
 	}
 

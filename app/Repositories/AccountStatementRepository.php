@@ -46,10 +46,10 @@ class AccountStatementRepository {
 		$data = $this->model->where('user_id', (int)$user);
 
 		if (isset($start_date))
-			$data = $data->where('created_at', '>=', "$start_date 00:00:00");
+			$data = $data->where('created_at', '>=', "{$start_date->format('Y-m-d')} 00:00:00");
 
 		if (isset($end_date))
-			$data = $data->where('created_at', '<=', "$end_date 23:59:59");
+			$data = $data->where('created_at', '<=', "{$end_date->format('Y-m-d')} 23:59:59");
 
 		if (isset($person))
 			$data = $data->where('person_id', (int)$person);

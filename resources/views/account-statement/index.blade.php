@@ -12,12 +12,12 @@
 
     <div class="form-group">
         {!! Form::label('start', 'Data Inicial'); !!}
-        {!! Form::text('start', $start, ['class' => 'form-control']) !!}
+        {!! Form::text('start', $start, ['class' => 'form-control datepicker']) !!}
     </div>
 
     <div class="form-group">
         {!! Form::label('end', 'Data Final'); !!}
-        {!! Form::text('end', $end, ['class' => 'form-control']) !!}
+        {!! Form::text('end', $end, ['class' => 'form-control datepicker']) !!}
     </div>
 
     <div class="form-group">
@@ -37,6 +37,7 @@
                 <th>#</th>
                 <th>Descrição</th>
                 <th>Operação</th>
+                <th>Data</th>
                 <th>Valor</th>
             </tr>
         </thead>
@@ -46,6 +47,7 @@
             <td>{{ $statement->id }}</td>
             <td>{{ $statement->description }}</td>
             <td>{{ $statement->operation == 'd' ? 'Débito' : 'Crédito' }}</td>
+            <td>{{ $statement->created_at->format('d/m/Y') }}</td>
             <td>R$ {{ number_format($statement->value, 2, ',', '.') }}</td>
         </tr>
     @endforeach
