@@ -30,6 +30,7 @@ elixir(function(mix) {
         "jquery.js",
         "bootstrap.js",
         "bootstrap-datepicker.js",
+        "jquery.maskMoney.js",
         "main.js"
     ])
     .version(["css/all.css", "js/all.js"])

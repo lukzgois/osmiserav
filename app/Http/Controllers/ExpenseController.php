@@ -48,14 +48,15 @@ class ExpenseController extends Controller {
     public function split(SplitExpenseRequest $request, UserRepository $userRepository)
     {
         $data = Input::only('owner', 'value', 'reference');
-        $users = $userRepository->all()->except($data['owner']);
+        $users = $userRepository->all();
+		$otherUsers = $users->except($data['owner']);
         $value = $data['value'];
         $perUser = $value / $users->count();
 
         return view('expense.split', [
-            'users' => $users,
+            'users' => $otherUsers,
             'value' => $value,
-            'perUser' => $perUser,
+            'perUser' => number_format($perUser, 2, ',','.'),
             'owner_id' => $data['owner'],
             'description' => $data['reference']
         ]);

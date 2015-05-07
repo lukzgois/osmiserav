@@ -17,7 +17,10 @@
 
         <div class="form-group">
             {!! Form::label($user->id, $user->name) !!}
-            {!! Form::text("user[{$user->id}]", $perUser, ['class' => 'form-control']) !!}
+            <div class="input-group">
+                <div class="input-group-addon">R$</div>
+                {!! Form::text("user[{$user->id}]", $perUser, ['class' => 'form-control money']) !!}
+            </div>
         </div>
 
     @endforeach
