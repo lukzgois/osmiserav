@@ -50,7 +50,7 @@ class ExpenseController extends Controller {
         $data = Input::only('owner', 'value', 'reference');
         $users = $userRepository->all();
 		$otherUsers = $users->except($data['owner']);
-        $value = $data['value'];
+        $value = str_replace(',','.', str_replace('.','.', $data['value']));
         $perUser = $value / $users->count();
 
         return view('expense.split', [
