@@ -15,7 +15,9 @@
                 <li><a href="{{ url('/') }}">Home</a></li>
                 <li><a href="{{ url('/expenses') }}">Minhas Despesas</a></li>
                 <li><a href="{{ url('/expenses/create') }}">Cadastrar Despesa</a></li>
+                <li><a href="{{ url('/payment/create') }}">Adicionar Pagamento</a></li>
                 <li><a href="{{ url('/account-statement') }}">Extrato</a></li>
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

@@ -66,5 +66,20 @@ class BalanceRepository {
         return $balance;
     }
 
+	/**
+	 * @param  $user
+	 * @param  $person
+	 * @param  $amount
+	 * @return mixed
+	 */
+	public function increment($user, $person, $amount)
+	{
+		$balance = $this->find($user, $person);
+		$balance->balance += $amount;
+		$balance->save();
+
+		return $balance;
+	}
+
 }
 
