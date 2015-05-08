@@ -20,6 +20,7 @@ class AccountStatementController extends Controller {
 	 *
 	 * @param AccountStatementRepository $accountStatementRepo
 	 * @param UserRepository $userRepo
+	 * @param SearchSanitizer $sanitizer
 	 * @return Response
 	 */
 	public function index(
@@ -35,8 +36,7 @@ class AccountStatementController extends Controller {
 		$statements = $accountStatementRepo->search(
 			Auth::user()->id,
 			$input['start'],
-			$input['end'],
-			$input['user']
+			$input['end']
 		);
 
 		return view('account-statement.index', [

@@ -20,10 +20,6 @@
         {!! Form::text('end', $end, ['class' => 'form-control datepicker']) !!}
     </div>
 
-    <div class="form-group">
-        {!! Form::label('user', 'Usuário'); !!}
-        {!! Form::select('user', $users, $user, ['class' => 'form-control']) !!}
-    </div>
 
     {!! Form::submit('Filtrar', ['class' => 'btn btn-primary']) !!}
 

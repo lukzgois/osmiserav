@@ -41,7 +41,7 @@ class AccountStatementRepository {
 	 * @param null $person
 	 * @return Collection
 	 */
-	public function search($user, $start_date = null, $end_date = null, $person = null)
+	public function search($user, $start_date = null, $end_date = null)
 	{
 		$data = $this->model->where('user_id', (int)$user);
 
@@ -50,9 +50,6 @@ class AccountStatementRepository {
 
 		if (isset($end_date))
 			$data = $data->where('created_at', '<=', "{$end_date->format('Y-m-d')} 23:59:59");
-
-		if (isset($person))
-			$data = $data->where('person_id', (int)$person);
 
 		return $data->get();
 	}
