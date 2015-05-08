@@ -27,7 +27,7 @@ class BalanceRepository {
 	 */
 	public function mine($user)
 	{
-		return $this->model->where('user_id', (int)$user)->get();
+		return $this->model->where('user_id', (int)$user)->with('person')->get();
 	}
 
 	/**
@@ -36,7 +36,7 @@ class BalanceRepository {
 	 */
 	public function others($user)
 	{
-		return $this->model->where('person_id', (int)$user)->get();
+		return $this->model->where('person_id', (int)$user)->with('user')->get();
 	}
 
 	/**
